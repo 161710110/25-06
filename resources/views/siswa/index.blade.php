@@ -11,7 +11,7 @@
                       @endrole
                     </div>
           <div class="table-responsive table--no-card m-b-40">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for nis..">
             <style type="text/css">
               #myInput {
     background-image: url('/css/searchicon.png'); /* Add a search icon to input */
@@ -46,6 +46,7 @@
     background-color: #f1f1f1;
 }
             </style>
+
             <script type="text/javascript">
               function myFunction() {
   // Declare variables 
@@ -57,7 +58,7 @@
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
@@ -117,7 +118,6 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Tambah Data</h4>
       </div>
       <div class="modal-body">

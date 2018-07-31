@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
@@ -23,8 +23,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::resource('kelas', 'KelasController');
 
 
-Route::get('/cek',function(){
-	return view('layouts.light');
+Route::get('/register',function(){
+	return view('errors.404');
 });
 Route::get('/side',function(){
 	return view('partials.sidebar');
@@ -34,10 +34,17 @@ Route::get('/lightside',function(){
 });
 
 Route::group(['prefix'=>'admin','middleware'=>['auth','role:admin']],function(){
+
 	Route::resource('jurusan','JurusanController');
 	Route::resource('kelas','KelasController');
 	Route::resource('siswa','SiswaController');
 	Route::resource('absen','AbsenController');
+	Route::get('/filter/kelas/{id}', 'AbsenController@filter');
 	Route::resource('akumulasi','AkumulasiController');
 }); 
+Route::group(['prefix'=>'user','middleware'=>['auth','role:user']],function(){
+Route::resource('rekap','FrontendController');
+Route::post('/isirekap' , 'FrontendController@index2')->name('isirekap');
+});
 Route::post('/laporanabsensi' , 'AkumulasiController@index2');
+Route::get('/rincianlowongan/{id}', 'FrontendController@bacalengkap');

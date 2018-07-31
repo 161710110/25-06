@@ -4,7 +4,7 @@
 		<div class="card">
         <div class="card-body">
             <h4 class="card-title">Data Akumulasi</h4>
-            <div class="pull-right">
+            <div class="pull-left">
 			<form action="{{url('laporanabsensi')}}" method="post">
 			{{csrf_field()}}
 			<label>Dari Tanggal</label>

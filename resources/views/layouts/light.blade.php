@@ -83,15 +83,8 @@
                 </li>
                 <li>
                     <a href="{{ route('akumulasi.index') }}">
-                        <i class="pe-7s-science"></i>
+                        <i class="pe-7s-plus"></i>
                         <p>Akumulasi</p>
-                    </a>
-                </li>
-                
-				<li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
                     </a>
                 </li>
 
@@ -121,15 +114,14 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
 						<li class="separator hidden-lg"></li>
                     </ul>

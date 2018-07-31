@@ -44,13 +44,14 @@ class AbsenController extends Controller
     {
         $this->validate($request,[
             'tanggal'=>'required',
+            'kelas_id'=>'required',
             'siswa_id'=>'required',
             'keterangan'=>'required'
         ]);
         $absen = new absen;
         $absen->tanggal = $request->tanggal;
+        $absen->kelas_id = $request->kelas_id;
         $absen->siswa_id = $request->siswa_id;
-        $absensi->kelas_id = $request->kelas_id;
         $siswa = Siswa::findOrFail($request->siswa_id);
         $absen->keterangan = $request->keterangan;
         $absen->save();
@@ -116,5 +117,17 @@ class AbsenController extends Controller
         $absen=absen::findOrFail($id);
         $absen->delete();
         return redirect()->route('absen.index');
+    }
+
+    public function filter($id)
+    {
+        $siswa = Siswa::where('kelas_id', $id)->get();
+        if($siswa->count() > 0){
+            foreach ($siswa as $data) {
+                echo '<option class="form-control" value="'.$data->id.'">'.$data->nama.'</option>';
+            }
+        }else{
+            echo '<option class="form-control">Tidak Ada Hasil</option>';
+        }
     }
 }

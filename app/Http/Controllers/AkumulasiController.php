@@ -21,7 +21,7 @@ class AkumulasiController extends Controller
         $a = $request->a;
         $b = $request->b;
         $kelas = $request->c;
-        $absen = absen::whereBetween('created_at', [$a, $b])->where('kelas_id','=',$kelas)->get();
+        $absen = absen::whereBetween('tanggal', [$a, $b])->where('kelas_id','=',$kelas)->get();
         return view('akumulasi.index2', compact('absen', 'a','b','kelas'));
     }
 }

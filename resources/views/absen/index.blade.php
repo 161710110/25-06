@@ -31,7 +31,7 @@
               <td>{{ $data->tanggal}}</td>
               <td>{{ $data->siswa->nama}}</td>
               <td>{{ $data->siswa->kelas->nama}}</td>
-              <td>{{ $data->keterangan}}</td>
+              <td>&#9899;{{ $data->keterangan}}</td>
             <td>
               <a class="item" data-toggle="tooltip" data-placement="top" title=" Edit" href="{{ route('absen.edit',$data->id) }}"><button><i class="pe-7s-edit"></i></a>
             </td>
@@ -60,9 +60,9 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Tambah Data</h4>
       </div>
+
       <div class="modal-body">
       <form action="{{ route('absen.store') }}" method="post">
       {{csrf_field()}}
@@ -74,7 +74,7 @@
 
       <div class="form-group">
             <label class="control-label">Kelas</label>
-            <select class="form-control-select2 kelas" name="kelas_id" required="" id="kelas">
+            <select class="form-control kelas" name="kelas_id" required="" id="kelas">
               @foreach($kelas as $data)
               <option value="{{$data->id}}">{{$data->nama}}
               </option>
@@ -84,11 +84,10 @@
 
             <div class="form-group">
             <label class="control-label">Nama :</label>
-            <select class="form-control-select2" name="siswa_id" required="" id="ngaran">
-              <!-- @foreach($siswa as $dd)
-              <option value="{{$dd->id}}">{{$dd->nama_siswa}}
-              </option>
-              @endforeach -->
+            <select class="form-control" name="siswa_id" required="" id="ngaran">
+              @foreach($siswa as $data)
+              <option value="{{$data->id}}">{{$data->nama}}</option>
+              @endforeach
             </select>
             </div>
 
@@ -113,4 +112,39 @@
     </div>
   </div>
 </div>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#kelas').change(function() {
+      $('#ngaran').html('');
+      $.ajax({
+        method : 'GET',
+        dataType: 'html',
+        url : 'filter/kelas/' + $(this).val(),
+        success : function(data){
+          $('#ngaran').append(data);
+        },
+        error : function() {
+          $('#ngaran').html('Tidak Ada Hasil');
+        }
+
+      });     
+    });
+    $('#class').change(function() {
+      $('#name').html('');
+      $.ajax({
+        method : 'GET',
+        dataType: 'html',
+        url : 'filter/kelas/' + $(this).val(),
+        success : function(data){
+          $('#name').append(data);
+        },
+        error : function() {
+          $('#name').html('Tidak Ada Hasil');
+        }
+
+      });     
+    })
+  });
+</script>
 @endsection

@@ -19,11 +19,11 @@
 					<?php
 					$no = 1;
 					?>
-						@foreach($absensi as $data)
+						@foreach($absen as $data)
 						<tbody>
 						<tr>
 							<td>{{$no++}}</td>
-							<td>{{$data->created_at}}</td>
+							<td>{{$data->tanggal}}</td>
 							<td>{{$data->siswa->nama}}</td>
 							<td>{{$data->kelas->nama}}</td>
 							<td>{{$data->keterangan}}</td>
